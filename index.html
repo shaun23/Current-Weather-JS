@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+   <meta content="utf-8" http-equiv="encoding">
+   <script type="text/javascript" src="weather.js"></script>
+   <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+   <script>
+   $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=London", function(result){
+      $("#stuff").append(result.name + "</BR>");
+      $("#stuff").append(result.coord.lon + "</BR>");
+      $("#stuff").append(result.weather[0].main + "</BR>");
+    });
+   </script>
+</head>
+
+<body>
+   <div id="stuff"></div>
+</body>
+</html>
