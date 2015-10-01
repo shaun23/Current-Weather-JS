@@ -6,15 +6,28 @@
    <script type="text/javascript" src="weather.js"></script>
    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
    <script>
-   $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=London", function(result){
-      $("#stuff").append(result.name + "</BR>");
-      $("#stuff").append(result.coord.lon + "</BR>");
-      $("#stuff").append(result.weather[0].main + "</BR>");
-    });
+   $(document).ready(function(){
+      $("#update").click(function() {
+         $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip=" + $("#zip").val(), function(result) {
+            $("#stuff").empty();
+            $("#stuff").append("Location: "+ result.name + "<br>");
+            $("#stuff").append("Weather: " + result.weather[0].description + " " +
+               "<img src=\"http://openweathermap.org/img/w/" + result.weather[0].icon +".png\"><br>");
+            var temp = 9/5 * (result.main.temp - 273) + 32;
+            $("#stuff").append("Temperature: "+ temp.toFixed(0) + "°F<br>");
+            $("#stuff").append("Humidity: "+ result.main.humidity + "%<br>");
+            temp = 9/5 * (result.main.temp_min - 273) + 32;
+            $("#stuff").append("Minimum Temperature: "+ temp.toFixed(0) + "°F<br>");
+            temp = 9/5 * (result.main.temp_max - 273) + 32;
+            $("#stuff").append("Maximum Temperature: "+ temp.toFixed(0) + "°F<br>");
+         });
+      });
+   });
    </script>
 </head>
 
 <body>
+   Zip Code: <input type="text" maxlength="5" id="zip"><button type="button" id="update">Update</button><br>
    <div id="stuff"></div>
 </body>
 </html>
