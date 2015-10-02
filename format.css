@@ -1,0 +1,13 @@
+/**
+ * used to shrink the width of the table
+ */
+table.shrink {
+   width: auto;
+}
+
+/**
+ * used to capitalize each word for cloudiness description
+ */
+div.capitalize {
+   text-transform:capitalize;
+}
